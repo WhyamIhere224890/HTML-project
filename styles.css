@@ -1,0 +1,121 @@
+:root {
+  --bg: rgb(60,100,120);
+  --bc: rgb(5,15,20);
+  --bb: rgb(20,30,40);
+  --hb: rgb(40,50,60);
+  --ab: rgb(50,70,90);
+  --cool: rgb(50,60,70);
+  --fontc: #fff;
+  --tran: none;
+}
+body {
+  padding: 100px;
+  color: var(--fontc);
+  background: var(--bg);
+  font-family: "Times New Roman", serif;
+  font-size: 25px;
+  transition: var(--tran);
+}
+.line {
+  position: relative; display: flex; flex-wrap: nowrap; width: 90vw;
+}
+.rAlign {
+  position: absolute; right: 10%; top: 0;
+}
+.noH {
+  user-select: none;
+}
+.ball {
+  width: 5%;
+  aspect-ratio: 1/1;
+  background-color: var(--fontc);
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  opacity: 1;
+}
+.fitDisplay {
+  width: fit-content;
+  height: fit-content;
+}
+.fixedDisplay, .fitDisplay {
+  border: 5px solid var(--bc);
+  border-radius: 10px;
+  background: var(--ab);
+  padding: 10px;
+  padding-right: 1em;
+  margin-right: 5em;
+  position: relative;
+}
+.err {
+  background-color: #ff0000; color: #fff;
+}
+.hbut {
+  position: absolute;
+  top: 150px;
+  right: 105px;
+  padding: 0;
+}
+.pbut, .hbut, .cbut, .but {
+  width: fit-content;
+  height: fit-content;
+  background: var(--bb);
+  border-radius: 10px;
+  border: 5px solid var(--bc);
+  color: var(--fontc);
+  font-size: 20px;
+  padding: 15px;
+  transition: var(--tran);
+  margin-right: 5px;
+}
+.pbut:hover, .hbut:hover, .cbut:hover, .but:hover {
+  background: var(--hb);
+  box-shadow: 
+  0px 0px 0px 2px var(--bc),
+  5px 5px 10px 3px var(--ab);
+}
+.pbut:active , .hbut:active, .cbut:active, .but:active {
+  background: var(--ab);
+  transition: none;
+  box-shadow: 
+  0px 0px 0px 5px var(--bc),
+  5px 5px 10px 3px var(--ab);
+}
+hr.cool {
+  background: var(--cool);
+  height: 10px;
+  border: none;
+  margin: none;
+  transition: var(--tran);
+}
+p,li {
+  text-indent: 50px;
+  font-family: Helvetica, sans-serif;
+}
+li {
+  text-indent: 5px;
+}
+img {
+  object-fit: contain;
+}
+h1{
+  font-size: 2em;
+}
+h2{
+  font-size: 1.5em;
+}
+h3{
+  font-size: 1.3em;
+}
+h4, summary{
+  font-size: 1em;
+}
+h5{
+  font-size: .8em;
+}
+h6{
+  font-size: .6em;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight: bold;
+}

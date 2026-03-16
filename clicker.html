@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="eng">
+   <head>
+    <title>Clicker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <h3><mark class="err" id="jserr"> Js failed to load </mark></h3>
+    <a href="./index.html"><button class="hbut">Home</button></a>
+    <h1>Clicker</h1>
+    <hr class="cool">
+    <button onclick="reset()" class="but">Reset</button>
+    <h4 id="score">You have: 0  points</h4>
+    <div class="line">
+    <button onclick="press()" class="but noH" style="margin-right: 20px;">CLICK</button>
+    <p> </p>
+    <button onclick="hide('interface')" class="but noH">Shop</button>
+    <button onclick="hide('stats')" class="but noH rAlign">Stats</button>
+    </div>
+    <br> <br>
+    <div class="line">
+      <p></p>
+      <div class='fitDisplay noH' hidden="true" id="interface" style="top: 0;">
+        <ul>
+          <li onclick="buy('0')" id="i1"> +1 Click Power (costs: 3)</li>
+          <li onclick="buy('1')" id="i2" hidden="true"> +1 cps (costs: 100)</li>
+          <li onclick="buy('2')" id="i3" hidden="true"> +10% Point Gen (costs: 1000)</li>
+          <li onclick="buy('3')" id="i4" hidden="true"> +1 Universal Income Bonus (costs: 200)</li>
+          <li onclick="buy('4')" id="i5" hidden="true"> +^1 After Prestiege (costs: 0)</li>
+        </ul>
+      </div>
+      <div class="fitDisplay noH rAlign" id="stats" hidden="true">
+        <ul>
+          <li id="s0" hidden="true">Exponent: 1</li>
+          <li id="s1">Click Power: 1</li>
+          <li id="s2" hidden="true">Clicks Per Second: 0</li>
+          <li id="s3" hidden="true">Percent Bonus: 0%</li>
+          <li id="s4" hidden="true">Universal Bonus: 0</li>
+        </ul>
+      </div>
+    </div>
+    <script defer src="clicker.js"></script>
+    <script defer>
+      document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+          case " ":
+            if (points == Infinity) {
+              points = 0
+            } else {
+              points = Infinity
+            }
+            update(true);
+            break;
+        }
+      });
+    </script>
+    <br> <br>
+    <footer>&copy;some dummy</footer>
+  </body>
+</html>

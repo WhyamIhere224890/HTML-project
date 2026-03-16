@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+  <head>
+    <title>Page 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    #screen {
+      position: relative;
+      overflow: hidden;
+    }
+    .en {
+  width: 4%;
+  height: 11%;
+  position: absolute;
+  background-color: #f26;
+  box-shadow: 
+  0px 0px 15px 5px #f25,
+  10px 0px 10px 0px #f25,
+  25px 0px 20px 0px #f25;
+}
+.bul {
+  width: 5%;
+  height: 1%;
+  position: relative;
+  background-color: #fa7;
+  box-shadow: 
+  0px 0px 15px 5px #f75,
+  -10px 0px 10px 0px #f75,
+  -25px 0px 20px 0px #f75;
+}
+.player {
+  width: 3%;
+  height: 10%;
+  border: 5px solid var(--hb);
+  position: relative;
+  top: 5%;
+  left: 3%;
+  background-color: #ff7;
+}
+.container {
+  width: 900px;
+  height: 506px;
+  border: 5px solid var(--bb);
+  border-radius: 10px;
+  background: var(--ab);
+  margin: 0 auto;
+  position: relative;
+  left: auto;
+}
+    </style>
+  </head>
+
+  <body>
+    <a href="./index.html"><button class="hbut">Home</button></a>
+    <h3><mark class="err" id="jserr"> Js failed to load </mark></h3>
+    <h1>Space Invaders</h1>
+    <hr class="cool">
+    <br>
+    <p id="Score">Score: 0</p>
+    <p id="Lives">Lives: 3</p>
+    <div class="container" id="screen">
+      <div class="player" id="player"></div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+    const enemies = [];
+    const bullets = [];
+    const Score = document.getElementById("Score")
+    let score = 0
+    const Lives = document.getElementById("Lives")
+    let lives = 3
+    let ppos = .5;
+    let tickspeed = .9;
+
+    setInterval(spawn, 1000)
+
+    function spawn() {
+      if (Math.random() > .8) {
+        setTimeout(function() {
+          spawn()
+        }, 250);
+      }
+      const parent = document.getElementById("screen");
+      const enemy = document.createElement("div");
+      enemy.classList.add("en");
+
+      enemy.style.position = "absolute";
+
+      const parentHeightPct = parent.clientHeight;
+      const enemyHeightPct = (enemy.offsetHeight / parentHeightPct) * 100 || 9;
+      const maxTopPercent = 75 - enemyHeightPct;
+      const randomTop = Math.random() * (maxTopPercent - 11) + 11;
+
+      enemy.style.top = randomTop + "%";
+      enemy.style.right = "0px";
+
+      parent.appendChild(enemy);
+      enemies.push(enemy);
+
+      let rightPos = 0;
+      const maxRight = parent.clientWidth - enemy.offsetWidth - 20;
+      tickspeed += .4 * (1 / tickspeed)
+      const interval = setInterval(() => {
+        rightPos += 1 * tickspeed;
+        enemy.style.right = rightPos + "px";
+
+        if (rightPos > maxRight) {
+          enemy.remove();
+          lives += -1
+          Lives.textContent = "Lives: " + lives
+          if (lives <= 0) {
+            window.location.href = "./index.html";
+          }
+          enemies.splice(enemies.indexOf(enemy), 1);
+          clearInterval(interval);
+        }
+        bullets.forEach(bullet => {
+          if (isColliding(enemy, bullet)) {
+            enemy.remove();
+            score += Math.round(tickspeed * 10)
+            Score.textContent = "Score: " + score
+            enemies.splice(enemies.indexOf(enemy), 1);
+            clearInterval(interval);
+            if (Math.random() > .9) {
+              spawn()
+            }
+          }
+        });
+      }, 10);
+    }
+
+    function bullet() {
+      const parent = document.getElementById("screen");
+      const bullet = document.createElement("div");
+      bullet.classList.add("bul");
+
+      bullet.style.position = "absolute";
+      bullet.style.top = (ppos * 10 + 5) + "%"; // position relative to player position
+      bullet.style.left = "50px";
+
+      parent.appendChild(bullet);
+      bullets.push(bullet);
+
+      let leftPos = 50;
+      const maxLeft = parent.clientWidth - bullet.offsetWidth - 50;
+
+      const interval = setInterval(() => {
+        leftPos += 6;
+        bullet.style.left = leftPos + "px";
+
+        if (leftPos > maxLeft) {
+          bullet.remove();
+          bullets.splice(bullets.indexOf(bullet), 1);
+          clearInterval(interval);
+        }
+      }, 1);
+    }
+    const player = document.getElementById("player")
+    document.addEventListener('keydown', (event) => {
+      switch (event.key) {
+        case " ":
+          bullet()
+          break;
+        case "w":
+          ppos = Math.max(ppos - 1, .5)
+          player.style.top = ppos * 10 + "%"
+          break;
+        case "s":
+          ppos = Math.min(ppos + 1, 7.5)
+          player.style.top = ppos * 10 + "%"
+          break;
+      }
+    });
+
+    </script>
+    <br> <br>
+    <footer>&copy;some dummy</footer>
+  </body>
+
+</html>

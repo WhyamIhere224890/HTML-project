@@ -1,0 +1,9 @@
+{
+  "name": "My games project",
+  "version": "3.2.5",
+  "description": "A collection of games im making, digit 1 in version is how many games are in here.",
+  "main": "main.js",
+  "keywords": [],
+  "author": "Ryan Forth",
+  "license": "MIT"
+}
